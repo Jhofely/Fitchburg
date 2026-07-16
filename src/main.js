@@ -18,32 +18,52 @@ const listing = {
 
 const photos = [
   {
-    src: '/photos/06-open-kitchen.jpg',
-    alt: 'Open kitchen and living area with hardwood floors and stainless appliances',
-    label: 'Open living',
+    src: '/photos/00-cover.webp',
+    alt: 'Furnished open kitchen, dining, and living area with hardwood floors',
+    label: 'Furnished open living',
   },
   {
-    src: '/photos/02-kitchen-wide.jpg',
+    src: '/photos/01-kitchen-main.webp',
     alt: 'White shaker kitchen with granite counters and stainless appliances',
-    label: 'Granite kitchen',
+    label: 'Full kitchen',
   },
   {
-    src: '/photos/04-bathroom.jpg',
+    src: '/photos/04-bathroom-wide.webp',
     alt: 'Updated bathroom with granite vanity and full tub shower',
-    label: 'Updated bath',
+    label: 'Full bathroom',
   },
   {
-    src: '/photos/01-laundry.jpg',
-    alt: 'In-home all-in-one washer and dryer in a laundry closet',
+    src: '/photos/03-bedroom.webp',
+    alt: 'Bedroom with hardwood floors, tall ceiling, and ductless climate control',
+    label: 'Bedroom',
+  },
+  {
+    src: '/photos/05-fridge.webp',
+    alt: 'Side-by-side stainless refrigerator with freezer doors open',
+    label: 'Stainless refrigerator',
+  },
+  {
+    src: '/photos/08-laundry.webp',
+    alt: 'In-home all-in-one washer and dryer in a dedicated laundry closet',
     label: 'In-home laundry',
   },
   {
-    src: '/photos/03-fridge.jpg',
-    alt: 'Side-by-side stainless refrigerator with freezer doors open',
-    label: 'Full appliance package',
+    src: '/photos/09-open-living.webp',
+    alt: 'Unfurnished open kitchen and living area with hardwood floors',
+    label: 'Open floor plan',
   },
   {
-    src: '/photos/05-range.jpg',
+    src: '/photos/02-closet.webp',
+    alt: 'Large closet with double doors and hardwood flooring',
+    label: 'Large closets',
+  },
+  {
+    src: '/photos/06-bathroom-vanity.webp',
+    alt: 'Bathroom vanity with granite counter and white cabinetry',
+    label: 'Granite vanity',
+  },
+  {
+    src: '/photos/07-range.webp',
     alt: 'Electric range and microwave framed by white cabinetry',
     label: 'Stainless range',
   },

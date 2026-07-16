@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "photos:webp": "bash scripts/convert-photos-to-webp.sh",
     "preview": "vite preview --host 0.0.0.0"
   },
   "devDependencies": {

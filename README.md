@@ -17,5 +17,9 @@ npm run build
 
 ## Photos
 
-Add the apartment photos to `public/photos` using the names listed in
-`public/photos/README.md`.
+Add the original photos to `public/photos/source` using the names listed in
+`public/photos/README.md`, then convert them:
+
+```bash
+npm run photos:webp
+```
