@@ -44,5 +44,7 @@ convert_one "06-bathroom-vanity" "06-bathroom-vanity"
 convert_one "07-range" "07-range"
 convert_one "08-laundry" "08-laundry"
 convert_one "09-open-living" "09-open-living"
+convert_one "10-bedroom-view" "10-bedroom-view"
+convert_one "11-open-layout-wide" "11-open-layout-wide"
 
 echo "Done. WebP quality: $QUALITY"

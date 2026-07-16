@@ -38,6 +38,11 @@ const photos = [
     label: 'Bedroom',
   },
   {
+    src: '/photos/10-bedroom-view.webp',
+    alt: 'Bedroom with hardwood floors and a large window overlooking downtown Fitchburg',
+    label: 'Bedroom view',
+  },
+  {
     src: '/photos/05-fridge.webp',
     alt: 'Side-by-side stainless refrigerator with freezer doors open',
     label: 'Stainless refrigerator',
@@ -51,6 +56,11 @@ const photos = [
     src: '/photos/09-open-living.webp',
     alt: 'Unfurnished open kitchen and living area with hardwood floors',
     label: 'Open floor plan',
+  },
+  {
+    src: '/photos/11-open-layout-wide.webp',
+    alt: 'Wide open living and kitchen layout with hardwood floors and tall ceilings',
+    label: 'Open layout',
   },
   {
     src: '/photos/02-closet.webp',
@@ -273,7 +283,11 @@ function renderApp() {
             <a href="tel:${listing.tel}">${listing.phone}</a>
           </div>
         </div>
-        <form class="tour-form" aria-describedby="form-status" data-endpoint="">
+        <form class="tour-form" aria-describedby="form-status" data-endpoint="/api/tour-request.php">
+          <label class="honeypot" aria-hidden="true">
+            Website
+            <input name="website" tabindex="-1" autocomplete="off" />
+          </label>
           <div class="form-row two-fields">
             <label>
               First name
@@ -359,8 +373,13 @@ function setupTourForm() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(form).entries());
-    const endpoint = form.dataset.endpoint || window.MANUS_TOUR_ENDPOINT;
+    const endpoint = getTourEndpoint(form);
     const button = form.querySelector('button[type="submit"]');
+    const payload = {
+      source: listing.name,
+      submittedAt: new Date().toISOString(),
+      ...formData,
+    };
 
     button.disabled = true;
     button.textContent = 'Sending...';
@@ -371,22 +390,19 @@ function setupTourForm() {
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            source: listing.name,
-            submittedAt: new Date().toISOString(),
-            ...formData,
-          }),
+          body: JSON.stringify(payload),
         });
+        const result = await response.json().catch(() => null);
 
-        if (!response.ok) {
+        if (!response.ok || result?.ok === false) {
           throw new Error('Request failed');
         }
       } else {
-        localStorage.setItem('latestTourRequest', JSON.stringify(formData));
+        localStorage.setItem('latestTourRequest', JSON.stringify(payload));
         await new Promise((resolve) => setTimeout(resolve, 450));
       }
 
-      status.textContent = 'Thanks. Your tour request has been captured.';
+      status.textContent = 'Thanks. Your tour request has been sent.';
       form.reset();
     } catch (error) {
       status.textContent = 'Please call the leasing team or try again in a moment.';
@@ -395,6 +411,13 @@ function setupTourForm() {
       button.textContent = 'Request Tour';
     }
   });
+}
+
+function getTourEndpoint(form) {
+  const configuredEndpoint = form.dataset.endpoint || window.MANUS_TOUR_ENDPOINT || '';
+  const localHosts = new Set(['localhost', '127.0.0.1', '::1', '']);
+
+  return localHosts.has(window.location.hostname) ? '' : configuredEndpoint;
 }
 
 renderApp();
